@@ -5,11 +5,11 @@ import Stories from "./Stories";
 
 const navItems = ["arts", "books", "fashion", "food", "movies", "travel"];
 const nytapi = "b0EDOD1ajEoIcL1Iv8vOHV7oS07SQZmh";
-const section = "arts";
 
 function App() {
   const [stories, setStories] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [section, setSection] = React.useState("arts");
 
   React.useEffect(() => {
     setLoading(true);
@@ -21,15 +21,16 @@ function App() {
       .then(setLoading(false));
   }, []);
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
-
   return (
     <>
-      <Header siteTitle="All the news that Fits We Print" />
-      <Nav navItems={navItems} />
-      <Stories stories={stories} />
+      <Header siteTitle="All the News that Fits We Print" />
+      <Nav navItems={navItems} setSection={setSection} />
+
+      {loading || stories.length === 0 ? (
+        <h2>Loading...</h2>
+      ) : (
+        <Stories stories={stories} />
+      )}
     </>
   );
 }
