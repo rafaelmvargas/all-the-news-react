@@ -1,13 +1,16 @@
 import React from "react";
+import NavItem from "./NavItem";
 
 const Nav = (props) => {
   return (
     <nav>
       <ul>
-        {props.navItems.map((navItem) => (
-          <li key={navItem}>
-            <a href={`#${navItem}`}>{navItem}</a>
-          </li>
+        {props.navItems.map((navItem, index) => (
+          <NavItem
+            key={index}
+            navItem={navItem}
+            setSection={props.setSection}
+          />
         ))}
       </ul>
     </nav>

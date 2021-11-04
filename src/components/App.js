@@ -18,8 +18,11 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => setStories(data.results))
-      .then(setLoading(false));
-  }, []);
+      .then(setLoading(false))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [section]);
 
   return (
     <>
